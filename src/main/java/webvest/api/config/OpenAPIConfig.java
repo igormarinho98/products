@@ -26,11 +26,11 @@ public class OpenAPIConfig {
 	  public OpenAPI myOpenAPI() {
 	    Server devServer = new Server();
 	    devServer.setUrl(devUrl);
-	    devServer.setDescription("Server URL in Development environment");
+	    devServer.setDescription("Server URL em Ambiente de Desenvolvimento");
 
 	    Server prodServer = new Server();
 	    prodServer.setUrl(prodUrl);
-	    prodServer.setDescription("Server URL in Production environment");
+	    prodServer.setDescription("Server URL em Ambiente de Producao");
 
 	    Contact contact = new Contact();
 	    contact.setEmail("igormarinholeo2014@gmail.com");

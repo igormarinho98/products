@@ -29,21 +29,17 @@ public class Category {
 		@Column(name = "active")
 		private boolean active;
 		
-		@Column(name = "product_id")
-		private String product_id;
-		
-		
+	
 		
 		public Category() {
 			
 		}
 		
-		public Category(String name, String description, boolean active, String product_id) {
+		public Category(String name, String description, boolean active) {
 			this.name = name;
 			this.description = description;
 			this.active = active;
-			this.product_id = UUID.randomUUID().toString();
-			 
+ 			 
 			
 		}
 
@@ -76,12 +72,5 @@ public class Category {
 			this.active = active;
 		}
 
-		public String getProduct_id() {
-			return product_id;
-		}
-
-		public void setProduct_id(String product_id) {
-			this.product_id = product_id ;
-		}
-
+		 
 }

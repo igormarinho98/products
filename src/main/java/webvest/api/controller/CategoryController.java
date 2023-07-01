@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,10 +54,20 @@ public class CategoryController {
 	public ResponseEntity<Category> createCategory(@RequestBody Category category) {
 		try {
 			Category _category = cRepository
-					.save(new Category(category.getName(), category.getDescription(), false, category.getProduct_id()));
+					.save(new Category(category.getName(), category.getDescription(), false ));
 			return new ResponseEntity<>(_category, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping("/categories/{id}")
+	public ResponseEntity<HttpStatus> deleteCategory(@PathVariable("id") long id) {
+		try {
+			cRepository.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

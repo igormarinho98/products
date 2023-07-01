@@ -65,7 +65,7 @@ public class ProductController {
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		try {
 			Product _product = productRepository
-					.save(new Product(product.getName(), product.getDescription(), false));
+					.save(new Product(product.getName(), product.getDescription(), false, product.getCategoryId()));
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -130,6 +130,7 @@ public class ProductController {
 			}
 		}
 		
+		// Lista os inativos
 		@GetMapping("/products/inactive")
 		public ResponseEntity<List<Product>> findByNotActive() {
 			try {

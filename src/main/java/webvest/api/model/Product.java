@@ -24,14 +24,20 @@ public class Product {
 	@Column(name = "active")
 	private boolean active;
 	
+	@Column(name = "category_id")
+	private String category_id;
+	
+	
+	
 	public Product() {
 		
 	}
 	
-	public Product(String name, String description, boolean active) {
+	public Product(String name, String description, boolean active, String category_id) {
 		this.name = name;
 		this.description = description;
 		this.active = active;
+		this.category_id = category_id;
 		
 	}
 
@@ -69,7 +75,14 @@ public class Product {
 	}
 	
 	
+	public String getCategoryId() {
+		return category_id;
+	}
+	
+	public void setCategoryId(String category_id) {
+		this.category_id = category_id;
+		
+	}
 	
 	
-
 }
