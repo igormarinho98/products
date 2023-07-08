@@ -15,38 +15,97 @@ public class Investment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "product")
-	private String product;
+	@Column(name = "investor_id")
+	private Long investor_id;
 	
 	 
-	@Column(name = "value")
-	private double value;
+	@Column(name = "type")
+	private String type;
+	
+	@Column(name = "investment_date")
+	private String investment_date;
+
+	@Column(name = "invested_amount")
+	private double invested_amount;
+	
+	@Column(name = "expected_return")
+	private double expected_return;
+	
+	@Column(name = "interest_rate")
+	private double interest_rate;
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "description")
+	private String description;
+	
 	
 	@Column(name = "active")
 	private boolean active;
 	
-	@Column(name = "account")
-	private int account;
-	
-	@Column(name = "agency")
-	private int agency;
-	
-	@Column(name = "type")
-	private String type;
+	 
+	@Column(name = "maturity_period")
+	private Integer maturity_period;
 	
 	
 	
-	public Investment(String product, double value, boolean active, int account, int agency, String type) {
+	public Investment(Long investor_id, String type, String investment_date, double invested_amount, double expected_return,  double interest_rate, Integer maturity_period, String status,boolean active,    String description) {
 		
-		this.product = product;
-		this.value = value;
-		this.active = active;
-		this.account = account;
-		this.agency = agency;
+		this.investor_id = investor_id;
 		this.type = type;
+		this.investment_date = investment_date;
+		this.invested_amount = invested_amount;
+		this.expected_return = expected_return;
+		this.interest_rate = interest_rate;
+		this.maturity_period = maturity_period;
+		this.status = status;
+		this.active = active;
+		this.description = description;
+
 		
 	}
 		
+	public double getExpectedreturn() {
+		return expected_return;
+	}
+
+	public double getInterestRate() {
+		return interest_rate;
+	}
+
+	public void setInterestRate(double interest_rate) {
+		this.interest_rate = interest_rate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setExpectedreturn(Integer expected_return) {
+		this.expected_return = expected_return;
+	}
+
+	public String getInvestedDate() {
+		return investment_date;
+	}
+
+	public void setInvesteddate(String invested_date) {
+		this.investment_date = invested_date;
+	}
+
 	public Investment() {
 			
 		}
@@ -57,20 +116,20 @@ public class Investment {
 
 	 
 
-	public String getProduct() {
-		return product;
+	public Long getInvestorId() {
+		return investor_id;
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
+	public void setnvestorId(Long investor_id) {
+		this.investor_id = investor_id;
 	}
 
 	public double getValue() {
-		return value;
+		return invested_amount;
 	}
 
 	public void setValue(double value) {
-		this.value = value;
+		this.invested_amount = value;
 	}
 
 	public boolean isActive() {
@@ -81,20 +140,13 @@ public class Investment {
 		this.active = active;
 	}
 
-	public int getAccount() {
-		return account;
+	  
+	public int getMaturity() {
+		return maturity_period;
 	}
 
-	public void setAccount(int account) {
-		this.account = account;
-	}
-
-	public int getAgency() {
-		return agency;
-	}
-
-	public void setAgency(int agency) {
-		this.agency = agency;
+	public void setMaturity(int agency) {
+		this.maturity_period = agency;
 	}
 
 	public String getType() {

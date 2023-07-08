@@ -1,5 +1,6 @@
 package webvest.api.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,28 +17,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletResponse;
+import webvest.api.config.CsvFileGenerator;
 import webvest.api.model.Investment;
 import webvest.api.repository.InvestmentRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class InvestmentController {
 	
 	@Autowired
-	 InvestmentRepository investRepository; 
+	 private InvestmentRepository investRepository; 
+	
+	@Autowired
+	private CsvFileGenerator csvGenerator;
 	
 	@GetMapping("/invest")
-	public ResponseEntity<List<Investment>> getAllInvest(@RequestParam(required = false)Integer account){
+	public ResponseEntity<List<Investment>> getAllInvest(@RequestParam(required = false)String description){
 		try {
 			List<Investment> investList = new ArrayList<Investment>();
 			
-			if (account == null)
+			if (description == null)
 				
 				investRepository.findAll().forEach(investList::add);
 				
 			else 
-				investRepository.findByAccount(account).forEach(investList::add);
+				investRepository.findByDescription(description).forEach(investList::add);
 			
 			if (investList.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -55,7 +61,7 @@ public class InvestmentController {
 	public ResponseEntity<Investment> createInvest(@RequestBody Investment invest) {
 		try {
 			Investment _invest = investRepository
-					.save(new Investment(invest.getProduct(), invest.getValue(), false, invest.getAccount(), invest.getAgency(), invest.getType()));
+					.save(new Investment(invest.getInvestorId(),  invest.getType(), invest.getInvestedDate(), invest.getValue(), invest.getExpectedreturn(), invest.getInterestRate(), invest.getMaturity(),invest.getStatus(), invest.isActive(),invest.getDescription()));
 			return new ResponseEntity<>(_invest, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,6 +82,8 @@ public class InvestmentController {
 	public ResponseEntity<List<Investment>> findByActive() {
 		try {
 			List<Investment> invest = investRepository.findByActive(true);
+			
+		 
 
 			if (invest.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -84,6 +92,30 @@ public class InvestmentController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:8080")
+	@GetMapping("/invest/export")
+	public void exportToCSV(HttpServletResponse response) throws IOException  {
+		try {
+			List<Investment> investList = new ArrayList<Investment>();
+					
+					
+			investRepository.findAll().forEach(investList::add);
+			
+			
+			
+			response.setContentType("text/csv");
+			response.addHeader("Content-Disposition", "attachment; filename=\"investimentos.csv\"");
+			csvGenerator.writeInvestToCsv(investList, response.getWriter());
+		 		
+ 	
+		// generator.generate(response);
+		} catch (Exception e){
+			 new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 	
 	@GetMapping("/invest/inactive")
@@ -99,5 +131,7 @@ public class InvestmentController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+ 
 	
 }

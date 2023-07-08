@@ -8,7 +8,9 @@ import webvest.api.model.Investment;
 
 public interface InvestmentRepository extends JpaRepository <Investment, Long> {
 	
-	List<Investment> findByAccount(Integer account);
+	List<Investment> findByDescription(String description);
+	
+	// List<Investment> findByProduct(String product);
 	
 	List<Investment> findByActive(boolean active);
  

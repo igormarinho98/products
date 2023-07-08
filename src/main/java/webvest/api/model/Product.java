@@ -25,7 +25,10 @@ public class Product {
 	private boolean active;
 	
 	@Column(name = "category_id")
-	private String category_id;
+	private Integer category_id;
+	
+	@Column(name = "rentabiity")
+	private double rentabiity;
 	
 	
 	
@@ -33,11 +36,12 @@ public class Product {
 		
 	}
 	
-	public Product(String name, String description, boolean active, String category_id) {
+	public Product(String name, String description, boolean active, Integer category_id, double rentabiity) {
 		this.name = name;
 		this.description = description;
 		this.active = active;
 		this.category_id = category_id;
+		this.rentabiity = rentabiity;
 		
 	}
 
@@ -69,20 +73,27 @@ public class Product {
 		this.active = active;
 	}
 	
-	@Override
-	public String toString() {
-		return "Tutorial [id=" + id + ", name=" + name + ", desc=" + description + ", active=" + active + "]";
-	}
+	 
 	
 	
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return category_id;
 	}
 	
-	public void setCategoryId(String category_id) {
+	public void setCategoryId(Integer category_id) {
 		this.category_id = category_id;
 		
 	}
+	
+	public double getRentability() {
+		return rentabiity;
+	}
+	
+	public void setRentability(double rentability) {
+		this.rentabiity = rentability;
+	}
+	
+	
 	
 	
 }
