@@ -26,7 +26,7 @@ import webvest.api.repository.SuitabilityRepository;
 	public class SuitabilityController {
 	
 		@Autowired
-		SuitabilityRepository suitabilityRepository;
+		private SuitabilityRepository suitabilityRepository;
 		
 		@GetMapping("/suitability")
 		public ResponseEntity<List<Suitability>> getAllSuit() {
