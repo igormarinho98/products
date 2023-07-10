@@ -95,7 +95,6 @@ public class InvestmentController {
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping("/invest/export")
 	public void exportToCSV(HttpServletResponse response) throws IOException  {
 		try {
