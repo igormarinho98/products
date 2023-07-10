@@ -16,4 +16,69 @@ public class Suitability {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
+	
+	@Column(name = "profile")
+	private String profile;
+
+	@Column(name = "description")
+	private String description;
+	
+	
+	@Column(name = "register_date")
+	private String register_date;
+	
+	@Column(name = "investor_id")
+	private Long investor_id;
+	
+	public Suitability() {
+		
+	}
+	
+	public Suitability(String profile, String description, String register_date, Long investor_id) {
+		this.profile = profile;
+		this.description = description;
+		this.register_date = register_date;
+		this.investor_id = investor_id;
+	}
+
+	public Long getInvestorId() {
+		return investor_id;
+	}
+
+	public void setInvestorId(Long investor_id) {
+		this.investor_id = investor_id;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRegisterDate() {
+		return register_date;
+	}
+
+	public void setRegisterDate(String register_date) {
+		this.register_date = register_date;
+	}
+	
 }

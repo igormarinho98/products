@@ -102,8 +102,8 @@ public class Investment {
 		return investment_date;
 	}
 
-	public void setInvesteddate(String invested_date) {
-		this.investment_date = invested_date;
+	public void setInvesteddate(String investment_date) {
+		this.investment_date = investment_date;
 	}
 
 	public Investment() {
