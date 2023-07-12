@@ -43,7 +43,7 @@ public class OpenAPIConfig {
 	        .title("Banking Products Management API")
 	        .version("1.0")
 	        .contact(contact)
-	        .description("This API exposes endpoints to manage tutorials.").termsOfService("https://www.minhaurl.com/terms")
+	        .description("Banking Products Management API").termsOfService("https://www.minhaurl.com/terms")
 	        .license(mitLicense);
 
 	    return new OpenAPI().info(info).servers(List.of(devServer, prodServer));

@@ -3,6 +3,7 @@ package webvest.api.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletResponse;
 import webvest.api.config.CsvFileGenerator;
 import webvest.api.model.Investment;
+import webvest.api.model.Investor;
 import webvest.api.repository.InvestmentRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -55,6 +57,22 @@ public class InvestmentController {
 		}
 		
 	}
+	
+	@GetMapping("/investment/{id}")
+	private ResponseEntity<Investment> getInvestment(@PathVariable("id") Long id) {
+		try {
+			Optional<Investment> investment = investRepository.findById(id);
+			
+			return new ResponseEntity<>(investment.get(), HttpStatus.OK);
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);		}
+		
+	}
+	
 	
 	
 	@PostMapping("/invest")

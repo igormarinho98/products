@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.io.IOException;
 import webvest.api.model.Investment;
+import webvest.api.model.Transaction;
 
 
 @Component
 public class CsvFileGenerator {
+	
+	
 public void writeInvestToCsv(List<Investment> listInvest, Writer writer) throws java.io.IOException {
 try {
  
@@ -27,5 +30,27 @@ printer.printRecord(invest.getId(),invest.getInvestorId(),  invest.getType(), in
 	e.printStackTrace();
 }
 }
+
+public void writeTransactionsToCsv(List<Transaction> listTransaction, Writer writer) throws java.io.IOException {
+try {
+ 
+	     
+
+CSVPrinter printer = new CSVPrinter(writer, CSVFormat.DEFAULT);
+ 
+for (Transaction transaction : listTransaction) {
+printer.printRecord(transaction.getId(),transaction.getInvestmentId(),  transaction.getTransactionDate(), transaction.getTransactionAmount(), transaction.getTransactionType(), transaction.getDescription());	
+}
+
+} catch (IOException e) {
+	e.printStackTrace();
+}
+}
+
+
+
+
+
+
 
 }
