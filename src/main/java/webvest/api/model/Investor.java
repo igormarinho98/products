@@ -48,13 +48,18 @@ public class Investor {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "suitability")
+	private Long suitability;
+	
+	
+	
 	
 	public Investor() {
 		
 	}
 		
 	
-	public Investor (String first_name, String last_name, String birthday, String cpf, String address, String city, String state, String zip_code, String email, String phone_number, String password) {
+	public Investor (String first_name, String last_name, String birthday, String cpf, String address, String city, String state, String zip_code, String email, String phone_number, String password, Long suitability) {
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.birthday = birthday;
@@ -66,9 +71,19 @@ public class Investor {
 		this.email = email;
 		this.phone_number = phone_number;
 		this.password = password;
+		this.suitability = suitability;
 		
 		
-		
+	}
+
+
+	public Long getSuitability() {
+		return suitability;
+	}
+
+
+	public void setSuitability(Long suitability) {
+		this.suitability = suitability;
 	}
 
 

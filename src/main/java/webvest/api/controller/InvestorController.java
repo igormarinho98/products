@@ -21,7 +21,7 @@ import webvest.api.repository.InvestorRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 public class InvestorController {
 
 	
@@ -32,7 +32,7 @@ public class InvestorController {
 	@PostMapping("/investor")
 	public ResponseEntity<Investor> createInvestor(@RequestBody Investor investor) {
 		try {
-			Investor _investor = investorRepository.save(new Investor(investor.getFirstName(), investor.getLastName(), investor.getBirthday(), investor.getCpf(), investor.getAddress(), investor.getCity(), investor.getState(), investor.getZipCode(), investor.getEmail(), investor.getPhoneNumber(), investor.getPassword()));
+			Investor _investor = investorRepository.save(new Investor(investor.getFirstName(), investor.getLastName(), investor.getBirthday(), investor.getCpf(), investor.getAddress(), investor.getCity(), investor.getState(), investor.getZipCode(), investor.getEmail(), investor.getPhoneNumber(), investor.getPassword(), investor.getSuitability()));
 			return new ResponseEntity<>(_investor, HttpStatus.CREATED);
 		} catch (Exception e) {
 			System.out.println(e);

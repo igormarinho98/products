@@ -36,7 +36,14 @@ public class Investment {
 	
 	@Column(name = "status")
 	private String status;
+
+	@Column(name = "rescue_date")
+	private String rescue_date;
 	
+	@Column(name = "product_id")
+	private Integer product_id;
+	
+
 	@Column(name = "description")
 	private String description;
 	
@@ -50,7 +57,7 @@ public class Investment {
 	
 	
 	
-	public Investment(Long investor_id, String type, String investment_date, double invested_amount, double expected_return,  double interest_rate, Integer maturity_period, String status,boolean active,    String description) {
+	public Investment(Long investor_id, String type, String investment_date, double invested_amount, double expected_return,  double interest_rate, Integer maturity_period, String status,boolean active, String description, String rescue_date, Integer product_id) {
 		
 		this.investor_id = investor_id;
 		this.type = type;
@@ -62,8 +69,26 @@ public class Investment {
 		this.status = status;
 		this.active = active;
 		this.description = description;
-
+		this.rescue_date = rescue_date;
+		this.product_id = product_id;
 		
+	}
+	
+	
+	public String getRescuedate() {
+		return rescue_date;
+	}
+	
+	public void setRescuedate(String rescue_date) {
+		this.rescue_date = rescue_date;
+	}
+	
+	public Integer getProductId() {
+		return product_id;
+	}
+	
+	public void setProductId(Integer product_id) {
+		this.product_id = product_id;
 	}
 		
 	public double getExpectedreturn() {
@@ -120,7 +145,7 @@ public class Investment {
 		return investor_id;
 	}
 
-	public void setnvestorId(Long investor_id) {
+	public void setInvestorId(Long investor_id) {
 		this.investor_id = investor_id;
 	}
 
@@ -156,7 +181,8 @@ public class Investment {
 	public void setType(String type) {
 		this.type = type;
 	}
-		
+
+	 
 	
 	
 

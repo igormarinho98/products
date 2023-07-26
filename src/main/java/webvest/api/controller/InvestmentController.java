@@ -21,10 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletResponse;
 import webvest.api.config.CsvFileGenerator;
 import webvest.api.model.Investment;
-import webvest.api.model.Investor;
 import webvest.api.repository.InvestmentRepository;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class InvestmentController {
@@ -48,7 +47,7 @@ public class InvestmentController {
 				investRepository.findByDescription(description).forEach(investList::add);
 			
 			if (investList.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);	
 			}
 			return new ResponseEntity<> (investList,HttpStatus.OK);
 			
@@ -73,13 +72,31 @@ public class InvestmentController {
 		
 	}
 	
+	@GetMapping("/investment/investors")
+	private ResponseEntity<List<Investment>> getInvestorsInvestment() {
+		try {
+			List<Investment> investmentList = new ArrayList<Investment>();
+					
+					
+					investRepository.findByInvestorExists().forEach(investmentList::add);
+			
+			return new ResponseEntity<>(investmentList, HttpStatus.OK);
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);		}
+		
+	}
+	
 	
 	
 	@PostMapping("/invest")
 	public ResponseEntity<Investment> createInvest(@RequestBody Investment invest) {
 		try {
 			Investment _invest = investRepository
-					.save(new Investment(invest.getInvestorId(),  invest.getType(), invest.getInvestedDate(), invest.getValue(), invest.getExpectedreturn(), invest.getInterestRate(), invest.getMaturity(),invest.getStatus(), invest.isActive(),invest.getDescription()));
+					.save(new Investment(invest.getInvestorId(),  invest.getType(), invest.getInvestedDate(), invest.getValue(), invest.getExpectedreturn(), invest.getInterestRate(), invest.getMaturity(),invest.getStatus(), invest.isActive(),invest.getDescription(), invest.getRescuedate(), invest.getProductId()));
 			return new ResponseEntity<>(_invest, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -110,6 +127,28 @@ public class InvestmentController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+ 
+
+	@GetMapping("/invest/my/{investorId}")
+	private ResponseEntity<List<Investment>> getInvestmentByInvestor(@PathVariable("investorId") Long id) {
+		try {
+			List<Investment> investment = new ArrayList<Investment>();
+					
+					
+					investRepository.findInvestmentByInvestor(id).forEach(investment::add);
+			
+			
+			
+			return new ResponseEntity<>(investment, HttpStatus.OK);
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);		}
+		
 	}
 	
 	

@@ -44,7 +44,7 @@ import webvest.api.repository.SuitabilityRepository;
 		@PostMapping("/suitability")
 		public ResponseEntity<Suitability> createSuitability(@RequestBody Suitability suitability) {
 			try {
-			Suitability _suitability = suitabilityRepository.save(new Suitability(suitability.getProfile(), suitability.getDescription(), suitability.getRegisterDate(), suitability.getInvestorId()));
+			Suitability _suitability = suitabilityRepository.save(new Suitability(suitability.getProfile(), suitability.getDescription(), suitability.getRegisterDate()));
 			return new ResponseEntity<>(_suitability, HttpStatus.CREATED); 
 			
 			} catch (Exception e) {
