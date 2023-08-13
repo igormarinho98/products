@@ -16,10 +16,13 @@ public class AccountService {
 	private AccountRepository accountRepository;
 	
 	
-	public Account createAccount(Long investor, double balanceStart) {
+	public Account createAccount(Long investor, double balanceStart, Integer agency, Integer accnumber) {
 		Account newAccount = new Account();
 		newAccount.setInvestor(investor);
 		newAccount.setBalance(balanceStart);
+		newAccount.setAgency(agency);
+		newAccount.setAccnumber(accnumber);
+
 		return accountRepository.save(newAccount);
 		
 	}
@@ -28,13 +31,21 @@ public class AccountService {
 		return accountRepository.findById(id).orElse(null);
 	}
 	
-	public void updateBalance(UUID id, double newBalance) {
-        Account account = searchById(id);
+	public Account searchByAcc(Integer accnumber, Integer agency) {
+		return accountRepository.findByAcc(accnumber, agency).orElse(null);
+	}
+	
+	
+	
+	public Account updateBalance(Integer accnumber, Integer agency, double newBalance) {
+        Account account = searchByAcc(accnumber, agency);
         if (account != null) {
         	account.setBalance(newBalance);
         	accountRepository.save(account);
         }
+		return account;
     }
+ 
 
 	
 	

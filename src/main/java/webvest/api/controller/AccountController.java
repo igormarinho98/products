@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import webvest.api.config.CreateAccountRequest;
+import webvest.api.config.UpdateAccountRequest;
 import webvest.api.model.Account;
 import webvest.api.repository.AccountRepository;
 import webvest.api.service.AccountService;
@@ -33,7 +34,13 @@ public class AccountController {
 
 	    @PostMapping("/newAccount")
 	    public ResponseEntity<Account> newAccount(@RequestBody CreateAccountRequest request) {
-	    	Account account = accService.createAccount(request.getInvestor(), request.getStartBalance());
+	    	Account account = accService.createAccount(request.getInvestor(), request.getStartBalance(), request.getAgency(), request.getAccnumber());
+	        return new ResponseEntity<>(account, HttpStatus.CREATED);
+	    }
+	    
+	    @PostMapping("/updateBalance")
+	    public ResponseEntity<Account> updateBal(@RequestBody UpdateAccountRequest request) {
+	    	Account account = accService.updateBalance(request.getAccnumber(), request.getAgency(), request.getNewBalance());
 	        return new ResponseEntity<>(account, HttpStatus.CREATED);
 	    }
 

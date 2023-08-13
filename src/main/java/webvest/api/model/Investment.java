@@ -55,9 +55,14 @@ public class Investment {
 	@Column(name = "maturity_period")
 	private Integer maturity_period;
 	
+	@Column(name = "accnumber")
+	private Integer accnumber;
 	
 	
-	public Investment(Long investor_id, String type, String investment_date, double invested_amount, double expected_return,  double interest_rate, Integer maturity_period, String status,boolean active, String description, String rescue_date, Integer product_id) {
+	
+	
+	
+	public Investment(Long investor_id, String type, String investment_date, double invested_amount, double expected_return,  double interest_rate, Integer maturity_period, String status,boolean active, String description, String rescue_date, Integer product_id, Integer accnumber) {
 		
 		this.investor_id = investor_id;
 		this.type = type;
@@ -71,10 +76,20 @@ public class Investment {
 		this.description = description;
 		this.rescue_date = rescue_date;
 		this.product_id = product_id;
-		
+		this.accnumber = accnumber;
 	}
 	
 	
+	public Integer getAccnumber() {
+		return accnumber;
+	}
+
+
+	public void setAccnumber(Integer accnumber) {
+		this.accnumber = accnumber;
+	}
+
+
 	public String getRescuedate() {
 		return rescue_date;
 	}

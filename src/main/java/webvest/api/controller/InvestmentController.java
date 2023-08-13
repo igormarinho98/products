@@ -96,7 +96,7 @@ public class InvestmentController {
 	public ResponseEntity<Investment> createInvest(@RequestBody Investment invest) {
 		try {
 			Investment _invest = investRepository
-					.save(new Investment(invest.getInvestorId(),  invest.getType(), invest.getInvestedDate(), invest.getValue(), invest.getExpectedreturn(), invest.getInterestRate(), invest.getMaturity(),invest.getStatus(), invest.isActive(),invest.getDescription(), invest.getRescuedate(), invest.getProductId()));
+					.save(new Investment(invest.getInvestorId(),  invest.getType(), invest.getInvestedDate(), invest.getValue(), invest.getExpectedreturn(), invest.getInterestRate(), invest.getMaturity(),invest.getStatus(), invest.isActive(),invest.getDescription(), invest.getRescuedate(), invest.getProductId(), invest.getAccnumber()));
 			return new ResponseEntity<>(_invest, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
