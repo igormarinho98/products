@@ -13,6 +13,7 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
 
+@Configuration
 public class OpenAPIConfig {
 
 	
@@ -40,10 +41,10 @@ public class OpenAPIConfig {
 	    License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
 	    Info info = new Info()
-	        .title("Banking Products Management API")
-	        .version("1.0")
+	        .title("API de Investimentos & Conta Corrente")
+	        .version("1.0.1")
 	        .contact(contact)
-	        .description("Banking Products Management API").termsOfService("https://www.minhaurl.com/terms")
+	        .description("Produtos Financeiros, Investimentos e Conta-Corrente.").termsOfService("https://www.minhaurl.com/terms")
 	        .license(mitLicense);
 
 	    return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
