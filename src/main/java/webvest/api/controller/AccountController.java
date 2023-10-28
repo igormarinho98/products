@@ -43,6 +43,15 @@ public class AccountController {
 	    	Account account = accService.updateBalance(request.getAccnumber(), request.getAgency(), request.getNewBalance());
 	        return new ResponseEntity<>(account, HttpStatus.CREATED);
 	    }
+	    
+	    
+	    @PostMapping("/withdrawBalance")
+	    public ResponseEntity<Account> withdrawBal(@RequestBody UpdateAccountRequest request) {
+	    	Account account = accService.withdrawBalance(request.getAccnumber(), request.getAgency(), request.getNewBalance());
+	        return new ResponseEntity<>(account, HttpStatus.CREATED);
+	    }
+	    
+	    
 
 	    @GetMapping("/{id}")
 	    public ResponseEntity<Account> searchAccount(@PathVariable UUID id) {

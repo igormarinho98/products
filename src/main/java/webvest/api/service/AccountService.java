@@ -40,13 +40,22 @@ public class AccountService {
 	public Account updateBalance(Integer accnumber, Integer agency, double newBalance) {
         Account account = searchByAcc(accnumber, agency);
         if (account != null) {
+        	newBalance = account.getBalance() + newBalance;
         	account.setBalance(newBalance);
         	accountRepository.save(account);
         }
 		return account;
     }
  
-
+	public Account withdrawBalance(Integer accnumber, Integer agency, double newBalance) {
+        Account account = searchByAcc(accnumber, agency);
+        if (account != null) {
+        	newBalance = account.getBalance() - newBalance;
+        	account.setBalance(newBalance);
+        	accountRepository.save(account);
+        }
+		return account;
+    }
 	
 	
 	

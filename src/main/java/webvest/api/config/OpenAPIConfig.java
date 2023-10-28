@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 
 
@@ -36,7 +39,7 @@ public class OpenAPIConfig {
 	    Contact contact = new Contact();
 	    contact.setEmail("igormarinholeo2014@gmail.com");
 	    contact.setName("Igor Marinho");
-	    contact.setUrl("https://linkedin/igormarinhodev");
+	    contact.setUrl("https://www.linkedin.com/in/igormarinhodev/");
 
 	    License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
@@ -47,7 +50,19 @@ public class OpenAPIConfig {
 	        .description("Produtos Financeiros, Investimentos e Conta-Corrente.").termsOfService("https://www.minhaurl.com/terms")
 	        .license(mitLicense);
 
-	    return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
+	    return new OpenAPI()
+	    		  .components(new Components()
+	                      .addSecuritySchemes("bearer-jwt", new SecurityScheme()
+	                              .type(SecurityScheme.Type.HTTP)
+	                              .scheme("bearer")
+	                              .bearerFormat("JWT")
+	                              .name("Authorization")
+	                              .in(SecurityScheme.In.HEADER)
+	                      )
+	              )
+	             .addSecurityItem(new SecurityRequirement().addList("bearer-jwt"))
+	    		.info(info)
+	    		.servers(List.of(devServer, prodServer));
 	  }
 	
 }
