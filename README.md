@@ -6,6 +6,12 @@
 
 ![image](https://github.com/igormarinho98/products/assets/35459531/b56aec29-8941-45fb-aadc-afe86759dcbf)
 
+<h1>Cadastro, Logout e Login</h1>
+<H3>Respectivamente cada um dos POST de auth-controller fazem as funções de Cadastro, Logout e Login </H3>
+
+![image](https://github.com/igormarinho98/products/assets/35459531/3c2db581-5581-4892-a0ff-db07a11b83a4)
+
+
 <h1>Auth Required</h1>
 
 ![image](https://github.com/igormarinho98/products/assets/35459531/21366108-2925-46b0-ada7-c9ce507b1137)
